@@ -1,2 +1,2 @@
 # Claude-Skill-Factory
-Claude-Skill-Factory is a premier hub for specialized AI assistants. I engineer high-precision system prompts that transform Claude from a general chatbot into a domain expert—from business intelligence to software engineering. My focus is on maximizing productivity through bespoke AI logic tailored for professional-grade workflows.
+Claude-Skill-Factory serves as a dedicated hub for professional-grade AI assistants. By developing high-precision system prompts, I bridge the gap between general conversation and expert-level execution. Whether it's business analysis or software engineering, this repository provides the custom AI logic necessary to drive maximum productivity in real-world professional environments.
