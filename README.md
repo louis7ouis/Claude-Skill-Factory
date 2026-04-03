@@ -1,191 +1,285 @@
-# Claude-Skill-Factory
+# Claude Skill Factory 🏭
 
-> System prompts that turn Claude into a specialist — not a better chatbot.
+> **Plug-in system prompts that turn Claude into a domain expert — not a better chatbot.**
 
-By default, Claude tries to please. These skills make it perform.
+By default, Claude is helpful but generic. These skills change that. Each one gives Claude a strict role, enforced output rules, and professional-grade logic. The difference isn’t subtle.
 
-Each skill gives Claude a strict role, enforced rules, and professional-grade output logic. The difference isn't subtle.
+-----
 
----
+## What is a Skill?
 
-## The problem with default Claude
+A `.skill` file is a structured system prompt. Paste it into Claude’s system prompt field and Claude instantly behaves like a specialist — it knows what to ask before acting, what to never skip, and how to format its output. No coding required.
 
-Ask Claude to review your code. It'll say *"Great approach! Here are a few suggestions..."* and bury the SQL injection vulnerability three paragraphs down.
+-----
 
-Ask it for an architecture recommendation. It'll suggest Kubernetes — even if you're a solo dev with $50/month.
+## How to Use a Skill
 
-Ask it anything. It'll start with *"Certainly! I'd be happy to help..."*
+**Claude.ai (browser or app):**
 
-Skills fix this.
+1. Go to **Claude.ai → Projects → Create Project**
+1. Open the `.skill` file with any text editor (Notepad, TextEdit, VS Code)
+1. Copy the full contents and paste them into the **“Project Instructions”** field
+1. Done — every conversation in that project now runs the skill
 
----
+**Claude API:**
 
-## How it works
+1. Open the `.skill` file and copy its contents
+1. Paste as your `system` parameter in the API request
+1. Done
 
-You paste a skill into Claude's system prompt. Claude stops acting like an assistant that tries to please — and starts acting like a specialist that knows exactly what to ask, what to never skip, and how to structure its output.
+> **Combining skills:** Copy multiple `.skill` files into the same system prompt and Claude runs all of them at once — see [Combining Skills](#combining-skills) below.
 
-**No coding required. Takes about 60 seconds.**
+-----
 
-### Claude.ai (browser / app)
+## All Skills — 31 Total
 
-1. Open **Claude.ai → Projects → Create Project**
-2. Download the `.skill` file from this repo and open it with any text editor
-3. Inside the zip, find `SKILL.md` — copy its entire contents
-4. Paste into the **Project Instructions** field
-5. Done. Every conversation in that project now runs the skill.
+Skills are grouped by domain. Click any skill name to view the file.
 
-### Claude API
+-----
 
-1. Download and extract the `.skill` file
-2. Copy the contents of `SKILL.md`
-3. Paste as your `system` prompt
-4. Done.
+### 🧑‍💻 Software Engineering
 
----
+|Skill                                               |One-liner                                                                                 |
+|----------------------------------------------------|------------------------------------------------------------------------------------------|
+|[Architecture-PRO](Architecture-pro.skill)          |System & cloud design — won’t suggest a stack without knowing budget, load, and team size |
+|[Design-PRO](Design-pro.skill)                      |UI/UX for any framework — enforces a strict design system: colors, spacing, fonts, shadows|
+|[Documentation-PRO](Documentation-pro.skill)        |Stops and asks before writing docs if anything in your code is ambiguous — no guessing    |
+|[Performance-PRO](Performance-pro.skill)            |Meta-skill — cuts all filler from Claude’s responses, no warmup, no “great question”      |
+|[Security-PRO](Security-pro.skill)                  |Code review in strict order: security holes first, then bugs, then performance, then style|
+|[Tech-Debt-Manager-PRO](Tech-Debt-Manager-PRO.skill)|Identifies, prioritizes, and creates actionable plans for reducing technical debt         |
+|[Prompt-Optimizer-PRO](Prompt-Optimizer-PRO.skill)  |Analyzes and rewrites prompts for maximum clarity, precision, and output quality          |
+|[Knowledge-Graph-PRO](Knowledge-Graph-PRO.skill)    |Structures complex information into connected knowledge graphs and relationship maps      |
 
-## Before / After
+-----
 
-**Default Claude — Code Review**
+### 🔐 Security & Compliance
 
-> "This looks great overall! A few things worth considering: you might want to add some error handling here, and the variable names could be a bit clearer. Great use of async/await by the way!"
+|Skill                                                       |One-liner                                                                                     |
+|------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+|[API-Security-PRO](API-Security-PRO.skill)                  |Audits API designs and implementations for authentication flaws, injection risks, and exposure|
+|[Vulnerability-Scanner-PRO](Vulnerability-Scanner-PRO.skill)|Scans code for known vulnerability patterns — reports severity, impact, and remediation       |
+|[Threat-Intelligence-PRO](Threat-Intelligence-PRO.skill)    |Analyzes threat landscapes, attack vectors, and produces structured intelligence reports      |
+|[Incident-Responder-PRO](Incident-Responder-PRO.skill)      |Structured incident response — containment, root cause analysis, and post-mortem output       |
+|[GDPR-Audit-PRO](GDPR-Audit-PRO.skill)                      |Reviews systems, processes, and data flows against GDPR requirements — gaps and fixes         |
+|[Regulatory-Watch-PRO](Regulatory-Watch-PRO.skill)          |Tracks regulatory requirements and flags compliance obligations relevant to your context      |
+|[Risk-Manager-PRO](Risk-Manager-PRO.skill)                  |Identifies, scores, and prioritizes operational and business risks with mitigation plans      |
 
-**Security-PRO — Code Review**
+-----
 
-> 🛑 **SECURITY** — Unsanitized user input passed directly to SQL query on line 34. SQL injection vector. Fix immediately.
->
-> ⚠️ **LOGIC** — Race condition in the session handler. Two concurrent requests can both pass the auth check before either writes to the DB.
->
-> 💡 **PERFORMANCE** — N+1 query in the user loop. Batch with a single JOIN.
->
-> 🧹 **CLEAN CODE** — `data2` on line 12 is undescriptive. No other issues.
+### ⚙️ DevOps & Architecture
 
-Same code. Completely different output.
+|Skill                                                     |One-liner                                                                                    |
+|----------------------------------------------------------|---------------------------------------------------------------------------------------------|
+|[DevOps-Strategist-PRO](DevOps-Strategist-PRO.skill)      |CI/CD pipeline design, infrastructure planning, and DevOps workflow optimization             |
+|[Automation-Architect-PRO](Automation-Architect-PRO.skill)|Designs automation strategies across tools and workflows — identifies what to automate first |
+|[Process-Miner-PRO](Process-Miner-PRO.skill)              |Maps and analyzes business processes to find bottlenecks, redundancies, and improvement areas|
 
----
+-----
 
-## Available Skills
+### 💼 Business & Operations
 
-| Skill | What it does | Key rule |
-|---|---|---|
-| [Architecture-PRO](#architecture-pro) | System & cloud design | Won't recommend a single technology until it knows your budget, team size, and expected traffic |
-| [Design-PRO](#design-pro) | UI/UX across any framework | Enforces Apple/Microsoft-level visual standards — colors, spacing, fonts, shadows, all defined |
-| [Documentation-PRO](#documentation-pro) | Code & API documentation | Stops and asks before writing docs if anything is ambiguous — no assumptions |
-| [Meeting-PRO](#meeting-pro) | Meeting transcripts | Pulls every decision, task, owner, and deadline — asks you to fill in anything missing |
-| [Performance-PRO](#performance-pro) | Claude's output quality | Cuts all filler from responses — no intros, no "I hope this helps", just the answer |
-| [Security-PRO](#security-pro) | Code review | Reviews in strict order: security first, then bugs, then performance, then style |
-| [API-Security-PRO](#api-security-pro) | API security auditing | Checks auth, input validation, rate limiting, and exposure before anything else |
-| [Automation-Architect-PRO](#automation-architect-pro) | Workflow automation | Maps dependencies and failure points before suggesting any tooling |
-| [Budget-Optimizer-PRO](#budget-optimizer-pro) | Cost analysis | Won't optimize what it hasn't measured first |
-| [Content-Strategist-PRO](#content-strategist-pro) | Content & growth strategy | Enforces niche + avatar definition before any content is planned |
-| [Contract-Reviewer-PRO](#contract-reviewer-pro) | Contract analysis | Flags missing clauses and one-sided terms before summarizing |
-| [CRM-Optimizer-PRO](#crm-optimizer-pro) | CRM workflow design | Audits data quality before recommending any process changes |
-| [Decision-Support-PRO](#decision-support-pro) | Structured decisions | Forces explicit trade-off mapping before any recommendation |
-| [DevOps-Strategist-PRO](#devops-strategist-pro) | CI/CD and infra | Won't design pipelines without knowing your current bottleneck |
-| [Employee-Engagement-PRO](#employee-engagement-pro) | Team & HR strategy | Diagnoses root causes before suggesting any engagement program |
-| [Financial-Forecaster-PRO](#financial-forecaster-pro) | Financial modeling | Requires actual data — refuses to model on assumptions |
-| [GDPR-Audit-PRO](#gdpr-audit-pro) | GDPR compliance | Full data flow mapping before any compliance recommendation |
-| [Incident-Responder-PRO](#incident-responder-pro) | Incident handling | Follows strict triage order — containment before root cause analysis |
-| [Knowledge-Graph-PRO](#knowledge-graph-pro) | Knowledge structuring | Maps entity relationships before building any graph structure |
-| [Lead-Qualifier-PRO](#lead-qualifier-pro) | Sales qualification | Applies a defined scoring framework — no gut-feel recommendations |
-| [Performance-Review-PRO](#performance-review-pro) | Employee reviews | Separates observation from interpretation throughout |
-| [Process-Miner-PRO](#process-miner-pro) | Process analysis | Documents the actual process before suggesting the ideal one |
-| [Prompt-Optimizer-PRO](#prompt-optimizer-pro) | Prompt engineering | Analyzes failure modes before rewriting anything |
-| [Regulatory-Watch-PRO](#regulatory-watch-pro) | Regulatory tracking | Scopes jurisdiction before any compliance analysis |
-| [Risk-Manager-PRO](#risk-manager-pro) | Risk assessment | Quantifies likelihood and impact before prioritizing anything |
-| [Supply-Chain-Risk-PRO](#supply-chain-risk-pro) | Supply chain analysis | Maps dependencies before assessing exposure |
-| [Talent-Scout-PRO](#talent-scout-pro) | Recruiting strategy | Defines the role scorecard before sourcing begins |
-| [Tech-Debt-Manager-PRO](#tech-debt-manager-pro) | Technical debt | Classifies debt by impact before recommending remediation |
-| [Threat-Intelligence-PRO](#threat-intelligence-pro) | Threat analysis | Establishes threat actor profile before any mitigation plan |
-| [UX-Researcher-PRO](#ux-researcher-pro) | UX research | Validates research questions before designing any study |
-| [Vulnerability-Scanner-PRO](#vulnerability-scanner-pro) | Security scanning | Scans in severity order — critical and high before medium or low |
+|Skill                                                 |One-liner                                                                                   |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------|
+|[Decision-Support-PRO](Decision-Support-PRO.skill)    |Frames complex decisions with criteria, trade-offs, and a structured recommendation         |
+|[Meeting-PRO](Meeting-pro.skill)                      |Extracts every decision, owner, and deadline from a transcript — asks you to fill any gaps  |
+|[Content-Strategist-PRO](Content-Strategist-PRO.skill)|Builds content strategies with audience analysis, channel mix, and measurable goals         |
+|[CRM-Optimizer-PRO](CRM-Optimizer-PRO.skill)          |Analyzes CRM data and workflows to improve pipeline management and customer retention       |
+|[Lead-Qualifier-PRO](Lead-Qualifier-PRO.skill)        |Scores and qualifies leads using defined criteria — outputs ranked lists with reasoning     |
+|[Supply-Chain-Risk-PRO](Supply-Chain-Risk-PRO.skill)  |Maps supply chain dependencies and identifies single points of failure and risk exposure    |
+|[Contract-Reviewer-PRO](Contract-Reviewer-PRO.skill)  |Reviews contracts for risk clauses, missing terms, and negotiation points — not legal advice|
 
----
+-----
+
+### 💰 Finance
+
+|Skill                                                     |One-liner                                                                                 |
+|----------------------------------------------------------|------------------------------------------------------------------------------------------|
+|[Financial-Forecaster-PRO](Financial-Forecaster-PRO.skill)|Builds financial forecasts with scenario analysis — always states assumptions explicitly  |
+|[Budget-Optimizer-PRO](Budget-Optimizer-PRO.skill)        |Analyzes budgets, finds inefficiencies, and proposes prioritized cost optimization actions|
+
+-----
+
+### 👥 HR & People
+
+|Skill                                                   |One-liner                                                                              |
+|--------------------------------------------------------|---------------------------------------------------------------------------------------|
+|[Talent-Scout-PRO](Talent-Scout-PRO.skill)              |Writes job specs, evaluates candidate profiles, and structures interview frameworks    |
+|[Performance-Review-PRO](Performance-Review-PRO.skill)  |Structures and writes performance reviews — balanced, specific, and development-focused|
+|[Employee-Engagement-PRO](Employee-Engagement-PRO.skill)|Designs engagement surveys, analyzes results, and produces actionable improvement plans|
+
+-----
+
+### 🎨 Design & UX
+
+|Skill                                       |One-liner                                                                                  |
+|--------------------------------------------|-------------------------------------------------------------------------------------------|
+|[Design-PRO](Design-pro.skill)              |UI/UX for any framework — enforces Apple/Microsoft-level visual standards every time       |
+|[UX-Researcher-PRO](UX-Researcher-PRO.skill)|Plans user research, designs interview guides, and synthesizes findings into clear insights|
+
+-----
 
 ## Skill Details
 
 ### Architecture-PRO
 
-> *"Never suggest a tech stack without knowing budget, load, and team size."*
+> *“Never suggest a tech stack without knowing budget, load, and team size.”*
 
-Claude becomes a Lead Cloud Architect. It won't touch a technology recommendation until it has three things: your monthly infrastructure budget, your expected traffic, and your team size. Once it has those, it gives a full analysis — trade-offs, costs, risks, and the reasoning behind every choice.
+Claude becomes a Lead Cloud Architect. It won’t touch a technology recommendation until it has three things from you: monthly infrastructure budget, expected traffic/user load, and team size. Once it has those, it gives a full analysis — trade-offs, costs, risks, and the reasoning behind every choice.
 
-Generic Claude suggests Kubernetes to a solo developer with $50/month. This skill won't.
-
----
+-----
 
 ### Design-PRO
 
-> *"Clean, modern, consistent — every time, any framework."*
+> *“Clean, modern, consistent — every time, any framework.”*
 
-Claude enforces a strict design system whenever it builds a UI — React, plain HTML, Flutter, ImGui, WPF, or anything else. Fixed rules: max 2–3 colors, 4px spacing grid, specific border radii, one shadow layer max, defined font stack.
+Claude enforces a strict design system whenever it builds a UI — doesn’t matter if it’s React, plain HTML, Flutter, or anything else. The rules are fixed: max 2–3 colors, 4px spacing grid, specific border radii, one shadow layer max, defined font stack.
 
-Without this skill, Claude produces visually inconsistent UIs that look different every time. With it, same quality standard across every component.
-
----
+-----
 
 ### Documentation-PRO
 
-> *"If the code is ambiguous, stop and ask — don't guess and document."*
+> *“If the code is ambiguous, stop and ask — don’t guess and document.”*
 
-Before writing a single line of documentation, Claude analyzes your code for ambiguous variable names, unexplained magic values, unclear side effects, and undocumented dependencies. If it finds any, it asks you to clarify before proceeding.
+Before writing a single line of documentation, Claude analyzes your code for ambiguous variable names, unexplained magic values, unclear side effects, and undocumented dependencies. If it finds any, it asks you to clarify first. Output language follows your input — write in German, get German docs.
 
-Bad docs come from assumptions. This skill eliminates assumptions before writing starts.
-
----
+-----
 
 ### Meeting-PRO
 
-> *"Every task needs an owner and a deadline. No exceptions."*
+> *“Every task needs an owner and a deadline. No exceptions.”*
 
-Paste in a meeting transcript — any language, any format — and Claude extracts every decision, action item with owner and deadline, open question, and blocker. If any task is missing an owner or deadline, it generates follow-up questions before giving you the final output.
+Paste in a meeting transcript (any language, any format) and Claude extracts all decisions, action items with owners and deadlines, open questions, and blockers. If any task is missing an owner or deadline, it generates targeted follow-up questions — it never silently skips incomplete items.
 
----
+-----
 
 ### Performance-PRO
 
-> *"No warmup. No 'great question'. No 'I hope this helps'. Just the answer."*
+> *“No warmup. No ‘great question’. No ‘I hope this helps’. Just the answer.”*
 
-A meta-skill — changes how Claude responds, not what it knows. Eliminates intro sentences, problem restatements, closing pleasantries, and hedge phrases.
+This meta-skill changes *how* Claude responds, not what it knows. It eliminates intro sentences, problem restatements, closing pleasantries, and hedge phrases. Decision rule: if the task is clear, execute immediately; if one critical thing is missing, ask exactly that one thing.
 
-Works with any other skill. Stack it on top of Architecture-PRO, Security-PRO, or any combination.
+> Works with any other skill — stack it on top of any combination.
 
----
+-----
 
 ### Security-PRO
 
-> *"No 'good approach, but...' — show the vulnerabilities first."*
+> *“No ‘good approach, but…’ — show the vulnerabilities first.”*
 
-Claude reviews code as a Senior Staff Engineer and Cybersecurity Expert. Review order is fixed:
+Claude reviews code as a Senior Staff Engineer and Cybersecurity Expert. The review always follows the same priority order:
 
-1. **Security** — SQL injection, XSS, CSRF, hardcoded secrets, missing auth checks, path traversal
-2. **Logic bugs** — race conditions, off-by-one errors, unhandled edge cases
-3. **Performance** — N+1 queries, O(n²) loops, blocking I/O
-4. **Clean code** — duplicates, SOLID violations, magic numbers
+1. 🛑 **Security** — SQL injection, XSS, CSRF, hardcoded secrets, missing auth checks
+1. ⚠️ **Logic bugs** — race conditions, off-by-one errors, unhandled edge cases
+1. 💡 **Performance** — N+1 queries, O(n²) loops, blocking I/O in async code
+1. 🧹 **Clean code** — duplicate code, SOLID violations, magic numbers, excessive nesting
 
-All four sections always appear — even if a section is empty, it's listed as clean.
+All four sections always appear — even if a section is empty, it’s listed as clean.
 
----
+-----
+
+### API-Security-PRO
+
+> *“Authentication, authorization, and exposure — audited in that order.”*
+
+Claude audits REST and GraphQL API designs and implementations for security vulnerabilities. Checks authentication mechanisms, authorization logic, rate limiting, input validation, data exposure, and OWASP API Top 10 issues. Outputs a prioritized findings report with fix guidance.
+
+-----
+
+### GDPR-Audit-PRO
+
+> *“Data flows first, compliance gaps second, remediation third.”*
+
+Claude maps data flows and processing activities against GDPR requirements. Identifies gaps in consent management, data subject rights, retention policies, third-party data sharing, and DPA agreements. Output is a structured audit report with risk ratings.
+
+-----
+
+### Financial-Forecaster-PRO
+
+> *“Every forecast states its assumptions. Every scenario has a name.”*
+
+Claude builds financial forecasts with explicit assumption documentation — no silent inputs. Always produces three scenarios (conservative, base, optimistic) with labeled drivers for each. Never presents a single-point forecast as fact.
+
+-----
+
+### Decision-Support-PRO
+
+> *“Define the decision, list the criteria, score the options, recommend one.”*
+
+Claude frames complex decisions using a structured framework: decision statement, success criteria, options, scoring matrix, and a single clear recommendation with reasoning. Never outputs a pros/cons list without a final recommendation.
+
+-----
+
+### Process-Miner-PRO
+
+> *“Map the current process before designing the future one.”*
+
+Claude analyzes business processes by mapping current-state workflows, identifying bottlenecks, redundant steps, and handoff failures before making any recommendations. Output includes a process map, waste analysis, and prioritized improvement backlog.
+
+-----
 
 ## Combining Skills
 
-Skills are composable. Copy multiple `SKILL.md` files into the same system prompt and Claude runs all of them:
+Copy multiple `.skill` files into the same system prompt — Claude runs all of them simultaneously:
 
 ```
-Architecture-PRO + Performance-PRO   →  fast, no-fluff architecture decisions
-Documentation-PRO + Security-PRO     →  secure code with complete docs
-Design-PRO + Performance-PRO         →  clean UI output, zero padding
+Architecture-PRO + Performance-PRO       →  fast, no-filler architecture decisions
+Security-PRO + Documentation-PRO         →  secure code with complete audit trail
+Design-PRO + Performance-PRO             →  clean UI output, zero padding
+Meeting-PRO + Performance-PRO            →  tight meeting summaries, no fluff
+GDPR-Audit-PRO + Risk-Manager-PRO        →  compliance risk with business impact scoring
+Vulnerability-Scanner-PRO + API-Security →  full-stack security review in one pass
 ```
 
----
+-----
+
+## Repository Structure
+
+```
+Claude-Skill-Factory/
+├── API-Security-PRO.skill
+├── Architecture-pro.skill
+├── Automation-Architect-PRO.skill
+├── Budget-Optimizer-PRO.skill
+├── CRM-Optimizer-PRO.skill
+├── Content-Strategist-PRO.skill
+├── Contract-Reviewer-PRO.skill
+├── Decision-Support-PRO.skill
+├── Design-pro.skill
+├── DevOps-Strategist-PRO.skill
+├── Documentation-pro.skill
+├── Employee-Engagement-PRO.skill
+├── Financial-Forecaster-PRO.skill
+├── GDPR-Audit-PRO.skill
+├── Incident-Responder-PRO.skill
+├── Knowledge-Graph-PRO.skill
+├── Lead-Qualifier-PRO.skill
+├── Meeting-pro.skill
+├── Performance-Review-PRO.skill
+├── Performance-pro.skill
+├── Process-Miner-PRO.skill
+├── Prompt-Optimizer-PRO.skill
+├── Regulatory-Watch-PRO.skill
+├── Risk-Manager-PRO.skill
+├── Security-pro.skill
+├── Supply-Chain-Risk-PRO.skill
+├── Talent-Scout-PRO.skill
+├── Tech-Debt-Manager-PRO.skill
+├── Threat-Intelligence-PRO.skill
+├── UX-Researcher-PRO.skill
+└── Vulnerability-Scanner-PRO.skill
+```
+
+-----
 
 ## Roadmap
 
-- `Analytics-PRO` — data analysis and chart generation
-- `API-PRO` — REST/GraphQL design with OpenAPI spec output
-- `Refactor-PRO` — opinionated, aggressive code refactoring
+- `Analytics-PRO` — data analysis and chart generation with explicit methodology
+- `API-Designer-PRO` — REST/GraphQL design with OpenAPI spec output
+- `Refactor-PRO` — opinionated, aggressive code refactoring with justification
 - `Startup-PRO` — product strategy and GTM planning
+- `Legal-Brief-PRO` — legal document summarization and clause extraction
 
----
+-----
 
 ## License
 
