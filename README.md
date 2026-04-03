@@ -281,6 +281,10 @@ Claude-Skill-Factory/
 
 -----
 
+## Questions & Custom Requests 📬
+Do you have questions, feedback, or specific tasks you'd like to discuss? Feel free to reach out directly on X (Twitter):
+👉 @louis7ouis
+
 ## License
 
 MIT — free to use, modify, and distribute. Attribution appreciated.
