@@ -1,4 +1,4 @@
-# Claude Skill Factory 🏭
+# Claude Skill Hub 🏭
 
 > **Plug-in system prompts that turn Claude into a domain expert — not a better chatbot.**
 
